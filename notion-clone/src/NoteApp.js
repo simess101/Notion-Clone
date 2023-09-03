@@ -4,12 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons';
 
 function NoteApp() {
-  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
+  const [tabs, setTabs] = useState(['All']);
+  const [selectedTab, setSelectedTab] = useState('All');
+  const [newTab, setNewTab] = useState('');
+  const [notes, setNotes] = useState([]);
 
   const addNote = () => {
     if (newNote.trim() === '') return;
-    setNotes([...notes, { text: newNote, completed: false }]);
+    setNotes([...notes, { text: newNote, completed: false, tab: selectedTab }]);
     setNewNote('');
   };
 
@@ -25,45 +28,96 @@ function NoteApp() {
     setNotes(updatedNotes);
   };
 
+  const addTab = () => {
+    if (newTab.trim() === '') return;
+    setTabs([...tabs, newTab]);
+    setNewTab('');
+  };
+
+  const deleteTab = (tabName) => {
+    if (tabName === 'All') return;
+    const updatedTabs = tabs.filter((tab) => tab !== tabName);
+    setTabs(updatedTabs);
+    if (selectedTab === tabName) {
+      setSelectedTab('All');
+    }
+  };
+
   return (
     <div className="note-app">
-      <h1>Notion Clone</h1>
-      <div className="note-input">
-        <input
-          type="text"
-          placeholder="Enter a new note"
-          value={newNote}
-          onChange={(e) => setNewNote(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              addNote();
-            }
-          }}
-        />
-        <button onClick={addNote}>Add</button>
+      <div className="tabs-column">
+        <h1>Tabs</h1>
+        <ul className="tabs-list">
+          {tabs.map((tabName) => (
+            <li key={tabName}>
+              <div
+                className={`tab ${selectedTab === tabName ? 'active' : ''}`}
+                onClick={() => setSelectedTab(tabName)}
+              >
+                {tabName}
+                {tabName !== 'All' && (
+                  <span
+                    className="delete-tab"
+                    onClick={() => deleteTab(tabName)}
+                  >
+                    &times;
+                  </span>
+                )}
+              </div>
+            </li>
+          ))}
+          <li>
+            <div className="add-tab">
+              <input
+                type="text"
+                placeholder="Add a tab"
+                value={newTab}
+                onChange={(e) => setNewTab(e.target.value)}
+              />
+              <button onClick={addTab}>Add</button>
+            </div>
+          </li>
+        </ul>
       </div>
-      <ul className="note-list">
-      {notes.map((note, index) => (
-  <li key={index} className={`note ${note.completed ? 'completed' : ''}`}>
-    <div className="note-content">
-      <div className="checkbox" onClick={() => toggleCompleted(index)}>
-        {note.completed ? (
-          <FontAwesomeIcon icon={faCheckSquare} />
-        ) : (
-          <FontAwesomeIcon icon={faSquare} />
-        )}
+      <div className="notes-column">
+        <h1>Notes</h1>
+        <div className="note-input">
+          <input
+            type="text"
+            placeholder="Enter a new note"
+            value={newNote}
+            onChange={(e) => setNewNote(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                addNote();
+              }
+            }}
+          />
+          <button onClick={addNote}>Add</button>
+        </div>
+        <ul className="note-list">
+          {notes
+            .filter((note) => selectedTab === 'All' || note.tab === selectedTab)
+            .map((note, index) => (
+              <li key={index} className={`note ${note.completed ? 'completed' : ''}`}>
+                <div className="checkbox" onClick={() => toggleCompleted(index)}>
+                  {note.completed ? (
+                    <FontAwesomeIcon icon={faCheckSquare} />
+                  ) : (
+                    <FontAwesomeIcon icon={faSquare} />
+                  )}
+                </div>
+                <span>{note.text}</span>
+                {note.completed && (
+                  <div className="delete" onClick={() => deleteNote(index)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </div>
+                )}
+              </li>
+            ))}
+        </ul>
       </div>
-      <span className="note-text">{note.text}</span>
-    </div>
-    {note.completed && (
-      <div className="delete" onClick={() => deleteNote(index)}>
-        <FontAwesomeIcon icon={faTrash} />
-      </div>
-    )}
-  </li>
-))}
-      </ul>
     </div>
   );
 }
