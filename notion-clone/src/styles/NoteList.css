@@ -1,0 +1,9 @@
+/* Styles for the list of notes component */
+.note-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Add more styles for your NoteList component */
+  

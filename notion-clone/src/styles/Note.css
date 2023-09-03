@@ -1,0 +1,14 @@
+/* Styles for individual note components */
+.note {
+    background-color: #f0f0f0;
+    padding: 8px;
+    margin: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Add more styles for your Note component */
+  
