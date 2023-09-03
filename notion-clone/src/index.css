@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Styles for the unordered list (ul) */
+
+ul {
+  list-style: none; /* Remove default list bullets */
+  padding: 0; /* Remove any default padding */
+}

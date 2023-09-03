@@ -1,11 +1,15 @@
+// NoteList.js
 import React from 'react';
-import Note from './Note';
+import './NoteList.css'; // Import the CSS file
 
 function NoteList({ notes, onDelete }) {
   return (
     <div className="note-list">
       {notes.map((note, index) => (
-        <Note key={index} text={note} onDelete={() => onDelete(index)} />
+        <div key={index} className="note">
+          <span>{note}</span>
+          <button onClick={() => onDelete(index)}>Delete</button>
+        </div>
       ))}
     </div>
   );

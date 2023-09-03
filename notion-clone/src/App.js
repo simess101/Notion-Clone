@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import NoteApp from "./NoteApp";
+import NoteApp from "./NoteApp.js";
 
 function App() {
   return (

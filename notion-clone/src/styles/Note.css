@@ -1,14 +1,19 @@
-/* Styles for individual note components */
+/* Styles for the note component */
 .note {
-    background-color: #f0f0f0;
-    padding: 8px;
-    margin: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Add more styles for your Note component */
-  
+  background-color: #f0f0f0;
+  padding: 8px;
+  margin: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style for completed tasks */
+.note.completed {
+  text-decoration: line-through; /* Add a line-through text decoration for completed tasks */
+  opacity: 0.6; /* Reduce opacity for completed tasks to make them visually different */
+}
+
+/* Add more styles for your Note component */

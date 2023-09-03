@@ -1,0 +1,83 @@
+/* Styles for the NoteApp component */
+.note-app {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+
+.note-app h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.note-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.note-input input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #3498db;
+  font-size: 16px;
+  outline: none;
+}
+
+.note-input button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.note-input button:hover {
+  background-color: #2980b9;
+}
+
+/* Styles for individual notes */
+.note-list {
+  list-style: none; /* Remove default list bullets */
+  padding: 0; /* Remove any default padding */
+}
+
+/* Styles for individual notes */
+.note {
+  background-color: #f0f0f0;
+  padding: 8px;
+  margin: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center; /* Center note text vertically */
+}
+
+.note.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.checkbox {
+  flex-shrink: 0; /* Prevent the checkbox from shrinking */
+  margin-right: 10px; /* Add some spacing between the checkbox and note text */
+}
+
+
+.note.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.checkbox {
+  margin-right: 10px;
+}
+
+/* Add more styles for your Note component as needed */

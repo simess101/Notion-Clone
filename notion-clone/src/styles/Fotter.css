@@ -1,9 +1,12 @@
 /* Styles for the footer component */
 .footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #888;
-  }
-  
-  /* Add more styles for your Footer component */
-  
+  margin-top: 20px;
+  font-size: 14px;
+  color: #888;
+  text-align: center; /* Center-align text */
+  padding: 10px; /* Add padding for spacing */
+  background-color: #f0f0f0; /* Set background color */
+  border-top: 1px solid #ddd; /* Add a top border for separation */
+}
+
+/* Add more styles for your Footer component */
