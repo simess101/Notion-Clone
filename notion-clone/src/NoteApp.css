@@ -57,27 +57,34 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   display: flex;
-  align-items: center; /* Center note text vertically */
+  justify-content: space-between; /* Align items to the start and end of the note */
+  align-items: center;
 }
 
 .note.completed {
-  text-decoration: line-through;
+  /* Strike-through only if completed */
+  text-decoration: none;
   opacity: 0.6;
 }
 
 .checkbox {
   flex-shrink: 0; /* Prevent the checkbox from shrinking */
   margin-right: 10px; /* Add some spacing between the checkbox and note text */
+  cursor: pointer;
 }
 
-
-.note.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
+.note-content {
+  flex-grow: 1; /* Expand to fill available space */
+  display: flex;
+  align-items: center;
 }
 
-.checkbox {
-  margin-right: 10px;
+.note-text {
+  margin-right: 10px; /* Add spacing between note text and checkbox */
 }
 
-/* Add more styles for your Note component as needed */
+.delete {
+  /* Style for the delete icon container */
+  cursor: pointer;
+  color: #e74c3c; /* Red color for the delete icon */
+}

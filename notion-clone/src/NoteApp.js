@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './NoteApp.css'; // Import the CSS file
+import './NoteApp.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons';
 
 function NoteApp() {
   const [notes, setNotes] = useState([]);
@@ -14,6 +16,12 @@ function NoteApp() {
   const toggleCompleted = (index) => {
     const updatedNotes = [...notes];
     updatedNotes[index].completed = !updatedNotes[index].completed;
+    setNotes(updatedNotes);
+  };
+
+  const deleteNote = (index) => {
+    const updatedNotes = [...notes];
+    updatedNotes.splice(index, 1);
     setNotes(updatedNotes);
   };
 
@@ -36,17 +44,25 @@ function NoteApp() {
         <button onClick={addNote}>Add</button>
       </div>
       <ul className="note-list">
-        {notes.map((note, index) => (
-          <li key={index} className={`note ${note.completed ? 'completed' : ''}`}>
-            <input
-              type="checkbox"
-              checked={note.completed}
-              onChange={() => toggleCompleted(index)}
-              className="checkbox"
-            />
-            {note.text}
-          </li>
-        ))}
+      {notes.map((note, index) => (
+  <li key={index} className={`note ${note.completed ? 'completed' : ''}`}>
+    <div className="note-content">
+      <div className="checkbox" onClick={() => toggleCompleted(index)}>
+        {note.completed ? (
+          <FontAwesomeIcon icon={faCheckSquare} />
+        ) : (
+          <FontAwesomeIcon icon={faSquare} />
+        )}
+      </div>
+      <span className="note-text">{note.text}</span>
+    </div>
+    {note.completed && (
+      <div className="delete" onClick={() => deleteNote(index)}>
+        <FontAwesomeIcon icon={faTrash} />
+      </div>
+    )}
+  </li>
+))}
       </ul>
     </div>
   );
