@@ -9,6 +9,7 @@ function NoteApp() {
   const [selectedTab, setSelectedTab] = useState('All');
   const [newTab, setNewTab] = useState('');
   const [notes, setNotes] = useState([]);
+  const [tabColor, setTabColor] = useState({ All: '#3498db' });
 
   const addNote = () => {
     if (newNote.trim() === '') return;
@@ -31,6 +32,10 @@ function NoteApp() {
   const addTab = () => {
     if (newTab.trim() === '') return;
     setTabs([...tabs, newTab]);
+    setTabColor((prevTabColor) => ({
+      ...prevTabColor,
+      [newTab]: '#3498db', // Set default color for the new tab
+    }));
     setNewTab('');
   };
 
@@ -38,9 +43,20 @@ function NoteApp() {
     if (tabName === 'All') return;
     const updatedTabs = tabs.filter((tab) => tab !== tabName);
     setTabs(updatedTabs);
+    setTabColor((prevTabColor) => {
+      const { [tabName]: deletedColor, ...rest } = prevTabColor;
+      return rest;
+    });
     if (selectedTab === tabName) {
       setSelectedTab('All');
     }
+  };
+
+  const handleTabColorChange = (tabName, color) => {
+    setTabColor((prevTabColor) => ({
+      ...prevTabColor,
+      [tabName]: color,
+    }));
   };
 
   return (
@@ -53,6 +69,7 @@ function NoteApp() {
               <div
                 className={`tab ${selectedTab === tabName ? 'active' : ''}`}
                 onClick={() => setSelectedTab(tabName)}
+                style={{ backgroundColor: tabColor[tabName] }}
               >
                 {tabName}
                 {tabName !== 'All' && (
@@ -63,6 +80,12 @@ function NoteApp() {
                     &times;
                   </span>
                 )}
+                <input
+                  type="color"
+                  value={tabColor[tabName]}
+                  onChange={(e) => handleTabColorChange(tabName, e.target.value)}
+                  style={{ marginLeft: '10px' }}
+                />
               </div>
             </li>
           ))}

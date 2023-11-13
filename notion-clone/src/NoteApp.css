@@ -48,7 +48,6 @@ body, h1, p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3498db; /* Background color for tabs */
 }
 
 .tab:hover {
